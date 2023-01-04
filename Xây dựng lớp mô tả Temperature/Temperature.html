@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Xây dựng  Temperature có thông số lớp là Trị số tính theo đơn vị độ C và có tính năng chuyển đổi từ độ C sang độ F và có tính năng chuyển đôi từ độ C sang độ K
+        class Temperature {
+            constructor(celsius) {
+                this.celsius = celsius;
+            }
+            getFahrenheit() {
+                return this.celsius * 1.8 + 32;
+            }
+            getKelvin() {
+                return this.celsius + 273.15;
+            }
+        }
+        let temperature = new Temperature(100);
+        console.log(temperature.getFahrenheit());
+        console.log(temperature.getKelvin());
+        
+
+    </script>
+</body>
+</html>

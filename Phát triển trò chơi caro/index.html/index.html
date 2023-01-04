@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Phát tiến trò chơi caro
+        function Player(name, symbol) {
+            this.name = name;
+            this.symbol = symbol;
+        }
+        function Board() {
+            this.board = [
+                ['', '', ''],
+                ['', '', ''],
+                ['', '', '']
+            ];
+            this.print = function () {
+                for (let i = 0; i < this.board.length; i++) {
+                    console.log(this.board[i]);
+                }
+            };
+            this.addSymbol = function (row, col, symbol) {
+                if (this.board[row][col] !== '') {
+                    return false;
+                }
+                this.board[row][col] = symbol;
+                return true;
+            };
+            this.checkWin = function (symbol) {
+                // Kiểm tra hàng ngang
+                for (let i = 0; i < this.board.length; i++) {
+                    let count = 0;
+                    for (let j = 0; j < this.board[i].length; j++) {
+                        if (this.board[i][j] === symbol) {
+                            count++;
+                        }
+                    }
+                    if (count === 3) {
+                        return true;
+                    }
+                }
+                // Kiểm tra hàng dọc
+                for (let i = 0; i < this.board.length; i++) {
+                    let count = 0;
+                    for (let j = 0; j < this.board[i].length; j++) {
+                        if (this.board[j][i] === symbol) {
+                            count++;
+                        }
+                    }
+                    if (count === 3) {
+                        return true;
+                    }
+                }
+                // Kiểm tra đường chéo chính
+                let count = 0;
+                for (let i = 0; i < this.board.length; i++) {
+                    if (this.board[i][i] === symbol) {
+                        count++;
+                    }
+                }
+                if (count === 3) {
+                    return true;
+                }
+                // Kiểm tra đường chéo phụ
+                count = 0;
+                for (let i = 0; i < this.board.length; i++) {
+                    if (this.board[i][this.board.length - 1 - i] === symbol) {
+                        count++;
+                    }
+                }
+                if (count === 3) {
+                    return true;
+                }
+                return false;
+            };
+        }
+        function Game(player1, player2) {
+            this.player1 = player1;
+            this.player2 = player2;
+            this.currentPlayer = player1;
+            this.board = new Board();
+            this.start = function () {
+                this.board.print();
+                while (true) {
+                    let row = parseInt(prompt("Nhập vào hàng: "));
+                    let col = parseInt(prompt("Nhập vào cột: "));
+                    if (this.board.addSymbol(row, col, this.currentPlayer.symbol)) {
+                        this.board.print();
+                        if (this.board.checkWin(this.currentPlayer.symbol)) {
+                            alert("Người chơi " + this.currentPlayer.name + " thắng!");
+                            break;
+                        }
+                        this.currentPlayer = this.currentPlayer === this.player1 ? this.player2 : this.player1;
+                    } else {
+                        alert("Vị trí đã có người đánh!");
+                    }
+                }
+            };
+        }
+        let player1 = new Player("Nguyễn Văn A", "X");
+        let player2 = new Player("Nguỳễn Văn B", "O");
+        let game = new Game(player1, player2);
+        game.start();
+        game.stop();
+
+        
+    </script>
+</body>
+</html>

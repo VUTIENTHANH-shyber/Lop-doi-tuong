@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400" style="border:1px solid #000000;">
+    </canvas>
+    <script>
+        // Xây dựng lớp hình chữ nhật có thông só lớp là chiều dài và chiều rộng và tính chu vi và diện tích và Có tính năng hiển thị trực quan hình chữ nhật bằng cách vẽ lên canvas
+        class Rectangle {
+            constructor(width, height) {
+                this.width = width;
+                this.height = height;
+            }
+            getArea() {
+                return this.width * this.height;
+            }
+            getPerimeter() {
+                return (this.width + this.height) * 2;
+            }
+            draw() {
+                let canvas = document.getElementById("myCanvas");
+                let ctx = canvas.getContext("2d");
+                ctx.beginPath();
+                ctx.rect(20, 20, this.width, this.height);
+                ctx.stroke();
+            }
+        }
+        let rectangle = new Rectangle(100, 200);
+        console.log(rectangle.getArea());
+        console.log(rectangle.getPerimeter());
+        rectangle.draw();
+
+     
+
+    </script>
+</body>
+</html>
